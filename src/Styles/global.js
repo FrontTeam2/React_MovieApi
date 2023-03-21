@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -27,5 +27,5 @@ const GlobalStyles = createGlobalStyle`
     --color-normal-gray: #333333;
     --color-red: #990101;
   }
-`;
-export default GlobalStyles;
+`
+export default GlobalStyles
