@@ -3,13 +3,17 @@ import GlobalStyles from './Styles/global'
 import theme from './Styles/theme'
 import { RouterProvider } from 'react-router-dom'
 import router from './Routes/routing'
+import { QueryClientProvider } from '@tanstack/react-query'
 
 function App() {
+	const queryClient = new QueryClient()
 	return (
-		<ThemeProvider theme={theme}>
-			<GlobalStyles />
-			<RouterProvider router={router} />
-		</ThemeProvider>
+		<QueryClientProvider client={queryClient}>
+			<ThemeProvider theme={theme}>
+				<GlobalStyles />
+				<RouterProvider router={router} />
+			</ThemeProvider>
+		</QueryClientProvider>
 	)
 }
 
