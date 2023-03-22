@@ -6,6 +6,12 @@ export const FlexCenterCSS = css`
 	align-items: center;
 `
 
+export const FlexBetWeenCSS = css`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`
+
 export const FlexAlignCSS = css`
 	display: flex;
 	align-items: center;
@@ -36,6 +42,12 @@ export const GridColumnThree = css`
 export const GridColumnOne = css`
 	grid-template-columns: repeat(3, 1fr);
 	column-gap: 30px;
+`
+
+export const MarginAuto = css`
+	width: 95%;
+	max-width: 120rem;
+	margin: 0 auto;
 `
 
 export const ShadowCSS = css`
