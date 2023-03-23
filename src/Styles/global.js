@@ -15,6 +15,12 @@ const GlobalStyles = createGlobalStyle`
     font-size:62.5%
   }
 
+  @media screen and (max-width:768px) {
+    html {
+      font-size:50%;
+    }
+  }
+
   ul, li {
     list-style: none;
   }
