@@ -1,17 +1,48 @@
 import styled from 'styled-components'
 import { MarginAuto } from '../../Styles/common'
-import NowPlayingSection from './Components/NowPlaying'
-import PopularSection from './Components/Popular'
+import Section from './Components/Section'
 import SearchSection from './Components/Search'
-import TopRatedSection from './Components/TopRated'
+import useGetPopular from '../../Hooks/Queries/Categories/get-popular'
+import useGetNowPlaying from '../../Hooks/Queries/Categories/get-nowPlaying'
+import useGetTopRated from '../../Hooks/Queries/Categories/get-topRated'
 
 function HomePage() {
+	const {
+		data: popularList,
+		status: popularStatus,
+		isLoading: popularIsLoading,
+	} = useGetPopular()
+	const {
+		data: nowList,
+		status: nowStatus,
+		isLoading: nowIsLoading,
+	} = useGetNowPlaying()
+	const {
+		data: topList,
+		status: topStatus,
+		isLoading: topIsLoading,
+	} = useGetTopRated()
 	return (
 		<S.HomeContainer>
 			<SearchSection />
-			<PopularSection />
-			<TopRatedSection />
-			<NowPlayingSection />
+			<Section
+				title={'인기있는'}
+				data={popularList}
+				status={popularStatus}
+				isLoading={popularIsLoading}
+			/>
+			<Section
+				title={'높은 평점순'}
+				data={nowList}
+				status={nowStatus}
+				isLoading={nowIsLoading}
+			/>
+			<Section
+				title={'현재 상영작'}
+				data={topList}
+				status={topStatus}
+				isLoading={topIsLoading}
+			/>
 		</S.HomeContainer>
 	)
 }
