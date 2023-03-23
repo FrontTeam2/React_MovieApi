@@ -30,22 +30,22 @@ export const GridCenter = css`
 
 export const GridColumnFive = css`
 	grid-template-columns: repeat(5, 1fr);
-	column-gap: 30px;
+	column-gap: 3rem;
 `
 
 export const GridColumnThree = css`
 	grid-template-columns: repeat(3, 1fr);
-	column-gap: 30px;
+	column-gap: 3rem;
 `
 
 export const GridColumnTwo = css`
 	grid-template-columns: repeat(2, 1fr);
-	column-gap: 30px;
+	column-gap: 3rem;
 `
 
 export const GridColumnOne = css`
 	grid-template-columns: repeat(1, 1fr);
-	column-gap: 30px;
+	column-gap: 3rem;
 `
 
 export const MarginAuto = css`
