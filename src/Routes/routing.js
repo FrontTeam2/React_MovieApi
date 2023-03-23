@@ -1,6 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../Components/Layouts'
 import HomePage from '../Pages/Home'
+import NowPlayingPage from '../Pages/Nowplaying'
+import PopularPage from '../Pages/Popular'
+import TopRatedPage from '../Pages/Toprated'
+import UpComingPage from '../Pages/Upcoming'
 
 const router = createBrowserRouter([
 	{
@@ -13,19 +17,19 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/popular',
-				element: '',
-			},
-			{
-				path: '/top_rated',
-				element: '',
+				element: <PopularPage />,
 			},
 			{
 				path: '/now_playing',
-				element: '',
+				element: <NowPlayingPage />,
+			},
+			{
+				path: '/top_rated',
+				element: <TopRatedPage />,
 			},
 			{
 				path: '/up_coming',
-				element: '',
+				element: <UpComingPage />,
 			},
 			{
 				path: '/search',
