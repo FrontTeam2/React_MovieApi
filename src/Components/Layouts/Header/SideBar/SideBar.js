@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { CiMenuBurger } from 'react-icons/ci'
 import { useEffect, useRef, useState } from 'react'
 import { FlexAlignCSS } from '../../../../Styles/common'
+import { useNavigate } from 'react-router-dom'
 
 function SideBar() {
 	const [isMenu, isSetMenu] = useState(false)
@@ -18,6 +19,8 @@ function SideBar() {
 			slideRef.current.style.transform = 'translateX(0%)'
 		}
 	}, [isMenu])
+
+	const navigate = useNavigate()
 	return (
 		<S.HamburgerMenu>
 			<CiMenuBurger
@@ -32,10 +35,10 @@ function SideBar() {
 
 			<S.SideBarContainer ref={slideRef}>
 				<ul>
-					<li>인기순</li>
-					<li>현재 상영작</li>
-					<li>개봉 예정작</li>
-					<li>평점순</li>
+					<li onClick={() => navigate('/popular')}>인기순</li>
+					<li onClick={() => navigate('/now_playing')}>현재 상영작</li>
+					<li onClick={() => navigate('/up_coming')}>개봉 예정작</li>
+					<li onClick={() => navigate('/top_rated')}>평점순</li>
 				</ul>
 			</S.SideBarContainer>
 		</S.HamburgerMenu>
@@ -46,8 +49,9 @@ export default SideBar
 
 const HamburgerMenu = styled.div`
 	${FlexAlignCSS}
+	cursor: pointer;
 
-	@media screen and (min-width:769px) {
+	@media screen and (min-width: 769px) {
 		display: none;
 	}
 `
@@ -72,6 +76,7 @@ const SideBarContainer = styled.nav`
 
 	& > ul > li {
 		margin-bottom: 4rem;
+		cursor: pointer;
 	}
 `
 
