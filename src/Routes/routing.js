@@ -3,6 +3,7 @@ import Layout from '../Components/Layouts'
 import HomePage from '../Pages/Home'
 import NowPlayingPage from '../Pages/Nowplaying'
 import PopularPage from '../Pages/Popular'
+import SearchPage from '../Pages/Search/testIndex'
 import TopRatedPage from '../Pages/Toprated'
 import UpComingPage from '../Pages/Upcoming'
 
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
 				element: <UpComingPage />,
 			},
 			{
-				path: '/search',
-				element: '',
+				path: '/search/:title',
+				element: <SearchPage />,
 			},
 			{
 				path: '/detail/:id',
