@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import {
 	FlexAlignCSS,
@@ -7,17 +8,18 @@ import {
 import SideBar from './SideBar/SideBar'
 
 function Header() {
+	const navigate = useNavigate()
 	return (
 		<S.HeaderWrapper>
 			<S.HeaderContainer>
 				<S.HeaderGNB>
-					<S.Logo>HEY, C&N</S.Logo>
+					<S.Logo onClick={() => navigate('/')}>HEY, C&N</S.Logo>
 					<S.Category>
 						<ul>
-							<li>인기순</li>
-							<li>현재 상영작</li>
-							<li>개봉 예정작</li>
-							<li>평점순</li>
+							<li onClick={() => navigate('/popular')}>인기순</li>
+							<li onClick={() => navigate('/now_playing')}>현재 상영작</li>
+							<li onClick={() => navigate('/up_coming')}>개봉 예정작</li>
+							<li onClick={() => navigate('/top_rated')}>평점순</li>
 						</ul>
 					</S.Category>
 				</S.HeaderGNB>
@@ -31,7 +33,10 @@ export default Header
 const HeaderWrapper = styled.section`
 	box-sizing: border-box;
 	box-shadow: 0 0.1rem 1rem;
-	padding: 0 2rem;
+
+	@media screen and (max-width: 768px) {
+		padding: 0 2rem;
+	}
 `
 
 const HeaderContainer = styled.header`
@@ -48,6 +53,7 @@ const HeaderGNB = styled.div`
 const Logo = styled.h1`
 	margin-right: 4rem;
 	color: var(--color-red);
+	cursor: pointer;
 `
 
 const Category = styled.nav`
@@ -58,6 +64,7 @@ const Category = styled.nav`
 
 	& > ul > li {
 		margin-right: 4rem;
+		cursor: pointer;
 	}
 
 	& > ul > li:last-child {
