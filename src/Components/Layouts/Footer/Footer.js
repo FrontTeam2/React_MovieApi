@@ -31,7 +31,7 @@ const FooterContainer = styled.div`
 	display:flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 24rem;
+	height: 28rem;
 	/* background: red; */
 `
 

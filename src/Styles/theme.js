@@ -1,10 +1,10 @@
 const FONT_SIZE = {
-	tiny: '12px',
-	small: '14px',
-	medium: '24px',
-	large: '24px',
-	big: '26px',
-	huge: '48px',
+	tiny: '1.2rem',
+	small: '1.4rem',
+	medium: '2.4rem',
+	large: '2.4rem',
+	big: '2.6rem',
+	huge: '4.8rem',
 }
 
 const FONT_WEIGHT = {
