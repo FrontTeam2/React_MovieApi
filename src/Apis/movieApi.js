@@ -10,7 +10,7 @@ const MovieApi = {
 		})
 	},
 
-	getContent({ category, page }) {
+	getCategory({ category, page }) {
 		return Axios.get(`/${PATH}/${category}`, {
 			params: { api_key: API_KEY, page },
 		})
