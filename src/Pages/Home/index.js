@@ -1,25 +1,27 @@
 import styled from 'styled-components'
-import useGetCategory from '../../Hooks/Queries/get-category'
 import { MarginAuto } from '../../Styles/common'
 import Section from './Components/Section'
 import SearchSection from './Components/Search'
+import useGetPopular from '../../Hooks/Queries/Categories/get-popular'
+import useGetNowPlaying from '../../Hooks/Queries/Categories/get-nowPlaying'
+import useGetTopRated from '../../Hooks/Queries/Categories/get-topRated'
 
 function HomePage() {
 	const {
 		data: popularList,
 		status: popularStatus,
 		isLoading: popularIsLoading,
-	} = useGetCategory({ category: 'popular' })
+	} = useGetPopular()
 	const {
 		data: nowList,
 		status: nowStatus,
 		isLoading: nowIsLoading,
-	} = useGetCategory({ category: 'now_playing' })
+	} = useGetNowPlaying()
 	const {
 		data: topList,
 		status: topStatus,
 		isLoading: topIsLoading,
-	} = useGetCategory({ category: 'top_rated' })
+	} = useGetTopRated()
 	return (
 		<S.HomeContainer>
 			<SearchSection />
