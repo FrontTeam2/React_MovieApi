@@ -111,7 +111,7 @@ const SliderContainer = styled.div`
 		width: 14rem;
 		height: 22rem;
 		background: #eee;
-		border-radius: 2rem;
+		border-radius: 1rem;
 	}
 
 	& > ul > li > div:last-child {
