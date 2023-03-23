@@ -1,4 +1,4 @@
-import { Axios } from 'axios'
+import { Axios } from './index'
 
 const PATH = 'movie'
 const API_KEY = process.env.REACT_APP_API_KEY

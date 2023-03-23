@@ -11,7 +11,7 @@ const getTrailer = async params => {
 const useGetTrailer = params => {
 	const { data, error, status, isLoading } = useQuery(
 		[QUERY_KEY.GET_TRAILER],
-		getTrailer(params),
+		() => getTrailer(params),
 		{ ...queryConfig },
 	)
 	return { data, error, status, isLoading }

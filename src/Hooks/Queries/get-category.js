@@ -11,7 +11,7 @@ const getCategory = async params => {
 const useGetCategory = params => {
 	const { data, error, status, isLoading } = useQuery(
 		[QUERY_KEY.GET_CATEGORY],
-		getCategory(params),
+		() => getCategory(params),
 		{ ...queryConfig },
 	)
 	return { data, error, status, isLoading }
