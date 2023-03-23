@@ -11,7 +11,7 @@ const getDetail = async params => {
 const useGetDetail = params => {
 	const { data, error, status, isLoading } = useQuery(
 		[QUERY_KEY.GET_DETAIL],
-		getDetail(params),
+		() => getDetail(params),
 		{ ...queryConfig },
 	)
 	return { data, error, status, isLoading }
