@@ -1,26 +1,39 @@
 import styled from 'styled-components'
+import useGetTrailer from '../../../Hooks/Queries/get-trailer'
 import { FlexAlignCSS, MarginAuto } from '../../../Styles/common'
 
-function VideoSection() {
+const VIDEO_URL = 'https://www.youtube.com/embed'
+
+function VideoSection({ movieId }) {
+	const {
+		data: trailerList,
+		error,
+		status,
+		isLoading,
+	} = useGetTrailer({ movieId })
+
 	return (
 		<S.VideoContainer>
 			<S.TitleText>
 				<h3>영상</h3>
 			</S.TitleText>
 			<S.Hr />
-			<S.VideoSliderWrap>
-				<S.VideoSlider>
-					<li>
-						<S.Video></S.Video>
-					</li>
-					<li>
-						<S.Video></S.Video>
-					</li>
-					<li>
-						<S.Video></S.Video>
-					</li>
-				</S.VideoSlider>
-			</S.VideoSliderWrap>
+			{status && !isLoading ? (
+				<S.VideoSliderWrap>
+					<S.VideoSlider>
+						{trailerList.results.map(video => (
+							<li key={video.id}>
+								<S.Video
+									title={video.name}
+									src={`${VIDEO_URL}/${video.key}?autoplay=1&mute=1`}
+								></S.Video>
+							</li>
+						))}
+					</S.VideoSlider>
+				</S.VideoSliderWrap>
+			) : (
+				<div>로딩중</div>
+			)}
 		</S.VideoContainer>
 	)
 }
@@ -76,9 +89,11 @@ const VideoSlider = styled.ul`
 	}
 `
 
-const Video = styled.video`
+const Video = styled.iframe`
 	width: 100%;
 	height: 100%;
+	border-radius: 2rem;
+	border: none;
 `
 
 const S = {

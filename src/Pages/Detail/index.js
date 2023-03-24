@@ -7,8 +7,8 @@ const URL = process.env.REACT_APP_IMAGE_BASEURL
 
 function DetailPage() {
 	const location = useLocation()
-	console.log(location.state.movie)
 	const {
+		id,
 		title,
 		overview,
 		original_language,
@@ -38,7 +38,7 @@ function DetailPage() {
 					</S.DescSection>
 				</S.Wrapper>
 			</S.BannerSection>
-			<VideoSection />
+			<VideoSection movieId={id} />
 		</>
 	)
 }
