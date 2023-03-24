@@ -50,8 +50,17 @@ const VideoSlider = styled.ul`
 	${FlexAlignCSS}
 	height:100%;
 	padding-right: 2rem;
+	padding-bottom: 2rem;
 	overflow-x: auto;
 	overflow-y: hidden;
+	::-webkit-scrollbar-thumb {
+		background: var(--color-light-gray);
+		border-radius: 0.5rem;
+	}
+	::-webkit-scrollbar {
+		width: auto;
+		height: 1rem;
+	}
 
 	& > li {
 		flex-shrink: 0;
