@@ -41,12 +41,20 @@ const GlobalStyles = createGlobalStyle`
     font-size:${({ theme }) => theme.FONT_SIZE.medium}
   }
 
+  h3 + p {
+    font-size:${({ theme }) => theme.FONT_SIZE.small}
+  }
+
   h4 {
     font-size:${({ theme }) => theme.FONT_SIZE.small}
   }
 
   h4 + p {
     font-size:${({ theme }) => theme.FONT_SIZE.tiny}
+  }
+
+  span {
+    font-size:${({ theme }) => theme.FONT_SIZE.small}
   }
 
   button {
