@@ -151,6 +151,7 @@ const PosterListWrap = styled.ul`
 	${GridCenter}
 	${GridColumnFive}
     row-gap:3rem;
+	margin-bottom: 3rem;
 
 	& > li {
 		${FlexBetWeenCSS}
@@ -178,13 +179,18 @@ const PosterListWrap = styled.ul`
 		}
 
 		& > li > div:first-child {
-			width: 50%;
+			width: 25%;
 		}
 
 		& > li > div:last-child {
+			width: 75% !important;
 			height: 100% !important;
 			justify-content: center;
 		}
+	}
+
+	& > li > div:first-child {
+		height: 70%;
 	}
 
 	& > li > div:last-child {
@@ -196,15 +202,24 @@ const PosterListWrap = styled.ul`
 		color: var(--color--black);
 		background: var(--color-white);
 	}
+
+	& > li > div:last-child > h4 {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 `
 const ImageBox = styled.div`
-	width: 14rem;
+	width: 100%;
 	height: 22rem;
 	background: #eee;
-	border-radius: 2rem;
-	background-image: ${({ image }) => `url(${image})`};
-	background-repeat: no-repeat;
+	/* border-radius: 2rem; */
+	background: ${({ image }) => `url(${image})`} no-repeat center center;
 	background-size: cover;
+
+	@media screen and (max-width: 768px) {
+		height: 100% !important;
+	}
 `
 
 const S = {
