@@ -93,7 +93,8 @@ const PosterSection = styled.div`
 		width: 100%;
 		grid-column-start: 1;
 		grid-column-end: 10;
-		height: 36rem;
+		height: 48rem;
+		background-size: contain;
 	}
 `
 

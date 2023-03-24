@@ -53,7 +53,7 @@ const InputContainer = styled.div`
 		box-sizing: border-box;
 		border-radius: 2rem;
 		text-indent: 4.4rem;
-		color: var(--color-light-gray);
+		color: var(--color--black);
 	}
 `
 
