@@ -1,4 +1,8 @@
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import MovieApi from '../../../Apis/movieApi'
+import { INFINITY_QUERY_KEY } from '../../../Consts/query-key'
 import {
 	FlexBetWeenCSS,
 	FlexCenterCSS,
@@ -7,97 +11,107 @@ import {
 	GridColumnOne,
 	GridColumnThree,
 } from '../../../Styles/common'
+import MainSkeleton from '../../Home/Components/Skeleton'
 
+const URL = process.env.REACT_APP_IMAGE_BASEURL
+const lengthArray = new Array(20).fill(0)
 function PosterListSection() {
+	const [isScrolling, setIsScrolling] = useState(false)
+
+	const observerElem = useRef(null)
+	const onClickScrolling = () => {
+		setIsScrolling(true)
+	}
+	const fetchMovies = async page => {
+		const res = await MovieApi.getCategory({ category: 'now_playing', page })
+		return res.data.results
+	}
+
+	const { data, isSuccess, hasNextPage, fetchNextPage, isFetchingNextPage } =
+		useInfiniteQuery(
+			[INFINITY_QUERY_KEY.GET_IF_NOW_PLAYING],
+			({ pageParam = 1 }) => fetchMovies(pageParam),
+			{
+				getNextPageParam: (lastPage, allPages) => {
+					const nextPage = allPages.length + 1
+					return lastPage.length !== 0 ? nextPage : undefined
+				},
+			},
+		)
+	console.log(data)
+	useEffect(() => {
+		let fetching = false
+		if (isScrolling) {
+			const handleScroll = async e => {
+				const { scrollHeight, scrollTop, clientHeight } =
+					e.target.scrollingElement
+				if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.2) {
+					fetching = true
+					if (hasNextPage) await fetchNextPage()
+					fetching = false
+				}
+			}
+			document.addEventListener('scroll', handleScroll)
+			return () => {
+				document.removeEventListener('scroll', handleScroll)
+			}
+		}
+	}, [isScrolling, fetchNextPage, hasNextPage])
+
+	const handleObserver = useCallback(
+		entries => {
+			const [target] = entries
+			if (target.isIntersecting) {
+				fetchNextPage()
+			}
+		},
+		[fetchNextPage, hasNextPage],
+	)
+
+	useEffect(() => {
+		const element = observerElem.current
+		const option = { threshold: 0 }
+		if (isScrolling) {
+			const observer = new IntersectionObserver(handleObserver, option)
+			observer.observe(element)
+			return () => observer.unobserve(element)
+		}
+	}, [fetchNextPage, hasNextPage, handleObserver])
+
 	return (
 		<S.PosterListContainer>
 			<S.PosterListWrap>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
-				<li>
-					<div></div>
-					<div>
-						<h4>보스턴 교살자</h4>
-						<p>2020.03.20</p>
-					</div>
-				</li>
+				{isSuccess === true &&
+					data.pages.map(page =>
+						page.map(movies => {
+							return (
+								<li key={movies.id}>
+									<S.ImageBox image={`${URL}${movies.poster_path}`} />
+									<div>
+										<h4>{movies.title}</h4>
+										<p>{movies.release_date}</p>
+									</div>
+								</li>
+							)
+						}),
+					)}
 			</S.PosterListWrap>
-			<button>더 불러오기</button>
+			{!isScrolling && (
+				<>
+					<button onClick={onClickScrolling}>더 불러오기</button>
+				</>
+			)}
+			<div ref={observerElem}>
+				{isSuccess && isFetchingNextPage && hasNextPage ? (
+					<>
+						{lengthArray.map((i, idx) => {
+							return <MainSkeleton key={idx} />
+						})}
+					</>
+				) : (
+					''
+				)}
+			</div>
 		</S.PosterListContainer>
 	)
 }
@@ -117,7 +131,6 @@ const PosterListContainer = styled.div`
 	}
 
 	& > button {
-		margin-top: 3rem;
 		box-sizing: border-box;
 		color: var(--color-white);
 		box-shadow: inset 0 0 1.4rem var(--color-red);
@@ -134,6 +147,7 @@ const PosterListContainer = styled.div`
 `
 
 const PosterListWrap = styled.ul`
+	margin-bottom: 3rem;
 	${GridCenter}
 	${GridColumnFive}
     row-gap:3rem;
@@ -183,8 +197,18 @@ const PosterListWrap = styled.ul`
 		background: var(--color-white);
 	}
 `
+const ImageBox = styled.div`
+	width: 14rem;
+	height: 22rem;
+	background: #eee;
+	border-radius: 2rem;
+	background-image: ${({ image }) => `url(${image})`};
+	background-repeat: no-repeat;
+	background-size: cover;
+`
 
 const S = {
 	PosterListContainer,
 	PosterListWrap,
+	ImageBox,
 }
