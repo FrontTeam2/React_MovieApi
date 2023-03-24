@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import MovieApi from '../../../Apis/movieApi'
 import { INFINITY_QUERY_KEY } from '../../../Consts/query-key'
@@ -79,18 +80,27 @@ function PosterListSection() {
 		}
 	}, [fetchNextPage, hasNextPage, handleObserver])
 
+	const navigate = useNavigate()
+
 	return (
 		<S.PosterListContainer>
 			<S.PosterListWrap>
 				{isSuccess === true &&
 					data.pages.map(page =>
-						page.map(movies => {
+						page.map(movie => {
 							return (
-								<li key={movies.id}>
-									<S.ImageBox image={`${URL}${movies.poster_path}`} />
+								<li
+									key={movie.id}
+									onClick={() =>
+										navigate(`/detail/${movie.id}`, {
+											state: { movie: movie },
+										})
+									}
+								>
+									<S.ImageBox image={`${URL}${movie.poster_path}`} />
 									<div>
-										<h4>{movies.title}</h4>
-										<p>{movies.release_date}</p>
+										<h4>{movie.title}</h4>
+										<p>{movie.release_date}</p>
 									</div>
 								</li>
 							)
