@@ -20,7 +20,7 @@ function Footer() {
 export default Footer
 
 const FooterWrapper = styled.footer`
-	margin-top: 4rem;
+	/* margin-top: 4rem; */
 	box-sizing: border-box;
 	box-shadow: 0 -0.1rem 1rem;
 	padding: 0 2rem;

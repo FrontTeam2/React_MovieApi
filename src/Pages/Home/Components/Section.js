@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FlexAlignCSS } from '../../../Styles/common'
 import MainSkeleton from './Skeleton'
@@ -6,6 +7,8 @@ const URL = process.env.REACT_APP_IMAGE_BASEURL
 const lengthArray = new Array(8).fill(0)
 
 function Section({ title, data, status, isLoading }) {
+	const navigate = useNavigate()
+
 	return (
 		<S.SectionContainer>
 			<S.TextContainer>
@@ -17,7 +20,12 @@ function Section({ title, data, status, isLoading }) {
 					{status === 'success' && !isLoading ? (
 						<>
 							{data.results.map(movie => (
-								<li key={movie.id}>
+								<li
+									key={movie.id}
+									onClick={() =>
+										navigate(`/detail/${movie.id}`, { state: { movie: movie } })
+									}
+								>
 									<S.ImageBox image={`${URL}${movie.poster_path}`} />
 									<div>
 										<h4>{movie.title}</h4>
@@ -47,7 +55,7 @@ const SectionContainer = styled.section`
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	margin-bottom: 30px;
+	margin-bottom: 3rem;
 `
 const TextContainer = styled.div`
 	color: var(--color-white);
@@ -77,6 +85,7 @@ const SliderContainer = styled.div`
 		flex-shrink: 0;
 		margin-right: 2rem;
 		overflow: visible;
+		cursor: pointer;
 	}
 
 	/* & > ul > li > div:first-child {
@@ -90,13 +99,19 @@ const SliderContainer = styled.div`
 		padding: 2rem 2rem 1rem;
 		width: 14rem;
 	}
+
+	& > ul > li > div:last-child > h4 {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
 `
 
 const ImageBox = styled.div`
 	width: 14rem;
 	height: 22rem;
 	background: #eee;
-	border-radius: 2rem;
+	border-radius: 1rem; // 전체 UI 맞추기 위해 List Edge 변형
 	background-image: ${({ image }) => `url(${image})`};
 	background-repeat: no-repeat;
 	background-size: cover;

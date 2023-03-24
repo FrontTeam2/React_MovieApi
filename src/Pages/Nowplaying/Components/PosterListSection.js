@@ -117,7 +117,6 @@ const PosterListContainer = styled.div`
 	}
 
 	& > button {
-		margin-top: 3rem;
 		box-sizing: border-box;
 		color: var(--color-white);
 		box-shadow: inset 0 0 1.4rem var(--color-red);
@@ -137,6 +136,7 @@ const PosterListWrap = styled.ul`
 	${GridCenter}
 	${GridColumnFive}
     row-gap:3rem;
+	margin-bottom: 3rem;
 
 	& > li {
 		${FlexBetWeenCSS}
