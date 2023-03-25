@@ -32,7 +32,13 @@ function SearchResultPage() {
 							{data.results?.map(movie => {
 								return (
 									<li key={movie.id} onClick={() => goDetail(movie.id)}>
-										<S.ImageBox image={`${URL}${movie.poster_path}`} />
+										<S.ImageBox
+											image={
+												movie.poster_path
+													? `${URL}${movie.poster_path}`
+													: `${process.env.PUBLIC_URL}/favicon.svg`
+											}
+										/>
 										<div>
 											<div>
 												<h4>{movie.title}</h4>
@@ -91,10 +97,10 @@ const SearchResultList = styled.ul`
 		height: 100%;
 	}
 
-	& > li > div:first-child {
+	/* & > li > div:first-child {
 		width: 25%;
 		background: var(--color-light-gray);
-	}
+	} */
 
 	& > li > div:last-child {
 		padding: 0 2rem;
@@ -113,8 +119,9 @@ const SearchResultList = styled.ul`
 `
 
 const ImageBox = styled.div`
-	background-image: ${({ image }) => `url(${image})`};
-	background-repeat: no-repeat;
+	width: 25%;
+	height: 100% !important;
+	background: ${({ image }) => `url(${image})`} no-repeat center center;
 	background-size: cover;
 `
 
