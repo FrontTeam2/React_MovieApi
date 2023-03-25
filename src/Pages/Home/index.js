@@ -5,8 +5,17 @@ import SearchSection from './Components/Search'
 import useGetPopular from '../../Hooks/Queries/Categories/get-popular'
 import useGetNowPlaying from '../../Hooks/Queries/Categories/get-nowPlaying'
 import useGetTopRated from '../../Hooks/Queries/Categories/get-topRated'
+import { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
+import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
 
 function HomePage() {
+	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)
+
+	useEffect(() => {
+		isSetMenu(false)
+	}, [])
+
 	const {
 		data: popularList,
 		status: popularStatus,

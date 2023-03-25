@@ -9,10 +9,19 @@ import {
 } from '../../Styles/common'
 import SearchSection from '../Home/Components/Search'
 import useGetSearch from '../../Hooks/Queries/get-search'
+import { useRecoilState } from 'recoil'
+import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
+import { useEffect } from 'react'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
 
 function SearchResultPage() {
+	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)
+
+	useEffect(() => {
+		isSetMenu(false)
+	}, [])
+
 	const { title } = useParams()
 	const { data, status, isLoading } = useGetSearch({ title })
 
