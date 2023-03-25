@@ -1,8 +1,24 @@
 import styled from 'styled-components'
 import { CiSearch } from 'react-icons/ci'
 import { FlexAlignCSS } from '../../../Styles/common'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 function SearchSection() {
+	const navigate = useNavigate()
+	const [title, setTitle] = useState('')
+	const onChangeSearch = e => {
+		setTitle(e.target.value)
+	}
+	const handleKeyPress = e => {
+		if (e.key === 'Enter') {
+			onSubmitSearch()
+		}
+	}
+	const onSubmitSearch = () => {
+		navigate(`/search/${title}`)
+	}
+
 	return (
 		<S.SearchContainer>
 			<S.TitleContainer>
@@ -23,6 +39,8 @@ function SearchSection() {
 				<input
 					type={'text'}
 					placeholder={'영화, TV 프로그램, 인물 검색...'}
+					onChange={onChangeSearch}
+					onKeyDown={handleKeyPress}
 				></input>
 			</S.InputContainer>
 		</S.SearchContainer>
@@ -53,7 +71,7 @@ const InputContainer = styled.div`
 		box-sizing: border-box;
 		border-radius: 2rem;
 		text-indent: 4.4rem;
-		color: var(--color-light-gray);
+		color: var(--color--black);
 	}
 `
 

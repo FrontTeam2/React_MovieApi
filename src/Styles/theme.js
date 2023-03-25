@@ -1,6 +1,6 @@
 const FONT_SIZE = {
 	tiny: '1.2rem',
-	small: '1.4rem',
+	small: '1.6rem',
 	medium: '2.4rem',
 	large: '2.4rem',
 	big: '2.6rem',
