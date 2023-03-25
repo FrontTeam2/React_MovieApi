@@ -17,9 +17,8 @@ function SearchResultPage() {
 	const { data, status, isLoading } = useGetSearch({ title })
 
 	const navigate = useNavigate()
-
-	const goDetail = id => {
-		navigate(`/detail/${id}`)
+	const goDetail = movie => {
+		navigate(`/detail/${movie.id}`, { state: { movie: movie } })
 	}
 
 	return (
@@ -31,7 +30,7 @@ function SearchResultPage() {
 						<>
 							{data.results?.map(movie => {
 								return (
-									<li key={movie.id} onClick={() => goDetail(movie.id)}>
+									<li key={movie.id} onClick={() => goDetail(movie)}>
 										<S.ImageBox image={`${URL}${movie.poster_path}`} />
 										<div>
 											<div>
@@ -91,11 +90,6 @@ const SearchResultList = styled.ul`
 		height: 100%;
 	}
 
-	& > li > div:first-child {
-		width: 25%;
-		background: var(--color-light-gray);
-	}
-
 	& > li > div:last-child {
 		padding: 0 2rem;
 		width: 75%;
@@ -113,6 +107,8 @@ const SearchResultList = styled.ul`
 `
 
 const ImageBox = styled.div`
+	width: 25%;
+	background: var(--color-light-gray);
 	background-image: ${({ image }) => `url(${image})`};
 	background-repeat: no-repeat;
 	background-size: cover;
