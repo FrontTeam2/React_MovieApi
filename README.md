@@ -32,8 +32,9 @@
 ### 🌳 프로젝트 폴더 구조
 
 ### 👨‍👩‍👧‍👦 팀원 소개 및 역할
-빈태찬_[beenbin](https://github.com/showme0241) | 김도은_[Doeunnkimm](https://github.com/Doeunnkimm) | 윤동영_[JacobYoon97](https://github.com/JacobYoon97) | 이하늘_[twosky0202](https://github.com/twosky0202) | 이주홍_[LEE JUHONG](https://github.com/dlwnghd)
-|--|--|--|--|--|
+빈태찬 | 김도은 | 윤동영 | 이하늘 | 이주홍
+|:--:|:--:|:--:|:--:|:--:|
+[beenbin](https://github.com/showme0241) | [Doeunnkimm](https://github.com/Doeunnkimm) | [JacobYoon97](https://github.com/JacobYoon97) | [twosky0202](https://github.com/twosky0202) | [LEE JUHONG](https://github.com/dlwnghd)
 PM, <br/>전체 UXUI, <br />상세 페이지 조회 기능 | API 모듈화, <br>react-query로 쿼리 훅 함수 정의, <br>메인 페이지 조회 기능 | 무한 스크롤링 기능, <br> 상세 리스트 페이지 조회 기능, <br>메인 및 상세 페이지 UI 참여 | 검색 기능,<br> 검색 결과 조회 기능 | - |
 
 ### ⚒️ 사용 기술 스텍
@@ -51,3 +52,5 @@ PM, <br/>전체 UXUI, <br />상세 페이지 조회 기능 | API 모듈화, <br>
 **react-query** | 데이터 관리 라이브러리
 
 ### 🤝 협업 
+Notion | https://legend-asiago-8af.notion.site/e7b571d087054fb6a3d0ef9208674887 |
+|--|--|
