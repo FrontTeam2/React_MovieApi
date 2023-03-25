@@ -71,6 +71,7 @@ const SliderContainer = styled.div`
 		color: var(--color-white);
 		overflow-x: auto;
 		padding-bottom: 1rem;
+		overflow-y: hidden;
 		::-webkit-scrollbar-thumb {
 			background: var(--color-light-gray);
 			border-radius: 0.5rem;
@@ -83,9 +84,13 @@ const SliderContainer = styled.div`
 
 	& > ul > li {
 		flex-shrink: 0;
+		padding-top: 1.5rem;
 		margin-right: 2rem;
 		overflow: visible;
 		cursor: pointer;
+		:hover {
+			transform: scale(1.1);
+		}
 	}
 
 	/* & > ul > li > div:first-child {
