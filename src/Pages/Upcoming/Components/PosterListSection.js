@@ -178,6 +178,9 @@ const PosterListWrap = styled.ul`
 		background: var(--color-light-gray);
 		box-sizing: border-box;
 		cursor: pointer;
+		:hover {
+			transform: scale(1.1);
+		}
 	}
 
 	@media screen and (max-width: 1320px) {
