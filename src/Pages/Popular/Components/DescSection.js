@@ -1,14 +1,9 @@
 import styled from 'styled-components'
 
-function DescSection() {
+function DescSection({ information }) {
 	return (
 		<S.DescContainer>
-			<p>
-				1985년 마약 밀매업자의 비행기 추락 사고로 인해 비행기에 실려있던
-				코카인이 조지아주 채터후치 국유림에 떨어지고 코카인을 손에 넣기 위한
-				마약상들과 관광객들이 코카인을 먹은 흑곰에 의해 처참하게 죽임을 당한다는
-				내용의 실화를 바탕으로 한 영화
-			</p>
+			{information ? <p>{information}</p> : <p>설명을 확인하세요!</p>}
 		</S.DescContainer>
 	)
 }

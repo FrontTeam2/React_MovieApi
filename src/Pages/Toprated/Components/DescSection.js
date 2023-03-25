@@ -1,12 +1,9 @@
 import styled from 'styled-components'
 
-function DescSection() {
+function DescSection({ information }) {
 	return (
 		<S.DescContainer>
-			<p>
-				At the turn of the 19th century, Pugilism was the sport of kings and a
-				gifted young boxer fought his way to becoming champion of England.
-			</p>
+			{information ? <p>{information}</p> : <p>설명을 확인하세요!</p>}
 		</S.DescContainer>
 	)
 }
