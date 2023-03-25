@@ -97,7 +97,13 @@ function PosterListSection() {
 										})
 									}
 								>
-									<S.ImageBox image={`${URL}${movie.poster_path}`} />
+									<S.ImageBox
+										image={
+											movie.poster_path
+												? `${URL}${movie.poster_path}`
+												: `${process.env.PUBLIC_URL}/favicon.svg`
+										}
+									/>
 									<div>
 										<h4>{movie.title}</h4>
 										<p>{movie.release_date}</p>
