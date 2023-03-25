@@ -36,9 +36,9 @@ function Section({ title, data, status, isLoading }) {
 						</>
 					) : (
 						<>
-							{lengthArray.map(i => (
-								<MainSkeleton />
-							))}
+							{lengthArray.map((i, idx) => {
+								return <MainSkeleton key={idx} />
+							})}
 						</>
 					)}
 				</ul>
