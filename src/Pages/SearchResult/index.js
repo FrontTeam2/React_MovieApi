@@ -1,3 +1,4 @@
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import {
 	FlexAlignCSS,
@@ -7,86 +8,45 @@ import {
 	MarginAuto,
 } from '../../Styles/common'
 import SearchSection from '../Home/Components/Search'
+import useGetSearch from '../../Hooks/Queries/get-search'
+
+const URL = process.env.REACT_APP_IMAGE_BASEURL
 
 function SearchResultPage() {
+	const { title } = useParams()
+	const { data, status, isLoading } = useGetSearch({ title })
+
+	const navigate = useNavigate()
+
+	const goDetail = id => {
+		navigate(`/detail/${id}`)
+	}
+
 	return (
 		<S.SearchResultContainer>
 			<SearchSection />
 			<S.SearchResultListWrap>
 				<S.SearchResultList>
-					<li>
+					{status === 'success' && !isLoading ? (
+						<>
+							{data.results?.map(movie => {
+								return (
+									<li key={movie.id} onClick={() => goDetail(movie.id)}>
+										<S.ImageBox image={`${URL}${movie.poster_path}`} />
+										<div>
+											<div>
+												<h4>{movie.title}</h4>
+												<p>{movie.release_date}</p>
+											</div>
+											<p>{movie.overview}</p>
+										</div>
+									</li>
+								)
+							})}
+						</>
+					) : (
 						<div></div>
-						<div>
-							<div>
-								<h4>KBS 드라마 스페셜</h4>
-								<p>5월 15, 2010</p>
-							</div>
-							<p>
-								다양하고 완성도 있는 이야기asdasdasdasda로 제작기asdasdasdasda로
-								제작기asdasdasdasda로 제작기asdasdasdasda로 제작된 단편
-							</p>
-						</div>
-					</li>
-					<li>
-						<div></div>
-						<div>
-							<div>
-								<h4>KBS 드라마 스페셜</h4>
-								<p>5월 15, 2010</p>
-							</div>
-							<p>
-								다양하고 완성도 있는 이야기로 제작된 단편드라마를 담은 프로그램
-							</p>
-						</div>
-					</li>
-					<li>
-						<div></div>
-						<div>
-							<div>
-								<h4>KBS 드라마 스페셜</h4>
-								<p>5월 15, 2010</p>
-							</div>
-							<p>
-								다양하고 완성도 있는 이야기로 제작된 단편드라마를 담은 프로그램
-							</p>
-						</div>
-					</li>
-					<li>
-						<div></div>
-						<div>
-							<div>
-								<h4>KBS 드라마 스페셜</h4>
-								<p>5월 15, 2010</p>
-							</div>
-							<p>
-								다양하고 완성도 있는 이야기로 제작된 단편드라마를 담은 프로그램
-							</p>
-						</div>
-					</li>
-					<li>
-						<div></div>
-						<div>
-							<div>
-								<h4>KBS 드라마 스페셜</h4>
-								<p>5월 15, 2010</p>
-							</div>
-							<p>
-								다양하고 완성도 있는 이야기로 제작된 단편드라마를 담은 프로그램
-							</p>
-						</div>
-					</li>
-					<li>
-						<div></div>
-						<div>
-							<div>
-								<h4>KBS 드라마 스페셜</h4>
-								<p>5월 15, 2010</p>
-							</div>
-							<p>
-								다양하고 완성도 있는 이야기로 제작된 단편드라마를 담은 프로그램
-							</p>
-						</div>
-					</li>
+					)}
 				</S.SearchResultList>
 			</S.SearchResultListWrap>
 		</S.SearchResultContainer>
@@ -152,8 +112,15 @@ const SearchResultList = styled.ul`
 	}
 `
 
+const ImageBox = styled.div`
+	background-image: ${({ image }) => `url(${image})`};
+	background-repeat: no-repeat;
+	background-size: cover;
+`
+
 const S = {
 	SearchResultContainer,
 	SearchResultListWrap,
 	SearchResultList,
+	ImageBox,
 }
