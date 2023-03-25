@@ -4,7 +4,7 @@ import { FlexAlignCSS } from '../../../Styles/common'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 
-function SearchSection() {
+function SearchSection({ searchTitle }) {
 	const navigate = useNavigate()
 	const [title, setTitle] = useState('')
 	const onChangeSearch = e => {
@@ -16,6 +16,10 @@ function SearchSection() {
 		}
 	}
 	const onSubmitSearch = () => {
+		if (title == '') {
+			alert('검색어를 입력해주세요')
+			return
+		}
 		navigate(`/search/${title}`)
 	}
 
@@ -37,10 +41,11 @@ function SearchSection() {
 					}}
 				/>
 				<input
-					type={'text'}
+					type="text"
 					placeholder={'영화, TV 프로그램, 인물 검색...'}
 					onChange={onChangeSearch}
 					onKeyDown={handleKeyPress}
+					defaultValue={searchTitle}
 				></input>
 			</S.InputContainer>
 		</S.SearchContainer>

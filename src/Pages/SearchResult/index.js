@@ -35,7 +35,7 @@ function SearchResultPage() {
 
 	return (
 		<S.SearchResultContainer>
-			<SearchSection />
+			<SearchSection searchTitle={title} />
 			<S.SearchResultListWrap>
 				<S.SearchResultList>
 					{status === 'success' && !isLoading ? (
