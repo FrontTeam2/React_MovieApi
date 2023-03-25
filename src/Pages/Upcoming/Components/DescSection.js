@@ -3,7 +3,11 @@ import styled from 'styled-components'
 function DescSection({ information }) {
 	return (
 		<S.DescContainer>
-			{information ? <p>{information}</p> : <p>설명을 확인하세요!</p>}
+			{information ? (
+				<p>{information}</p>
+			) : (
+				<p>* PC : 포스터에 마우스를 올릴시, 줄거리 확인 가능</p>
+			)}
 		</S.DescContainer>
 	)
 }
@@ -11,9 +15,9 @@ function DescSection({ information }) {
 export default DescSection
 
 const DescContainer = styled.div`
-	/* position: fixed;
-	left: 0; */
 	width: 100%;
+	margin: 0 auto;
+	max-width: 120rem;
 	grid-column-start: 1;
 	grid-column-end: 2;
 	/* background: red; */
@@ -27,7 +31,15 @@ const DescContainer = styled.div`
 	}
 
 	& > p {
+		position: fixed;
+		max-width: 38rem;
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
+
+		@media screen and (max-width: 768px) {
+			position: relative;
+			width: 100%;
+			max-width: 100%;
+		}
 	}
 `
 const S = {
