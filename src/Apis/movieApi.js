@@ -12,13 +12,13 @@ const MovieApi = {
 
 	getCategory({ category, page }) {
 		return Axios.get(`/${PATH}/${category}`, {
-			params: { api_key: API_KEY, page },
+			params: { api_key: API_KEY, language: 'ko-KR', page },
 		})
 	},
 
 	getDetailContent({ movieId }) {
 		return Axios.get(`/${PATH}/${movieId}`, {
-			params: { api_key: API_KEY, page },
+			params: { api_key: API_KEY, language: 'ko-KR', page },
 		})
 	},
 
