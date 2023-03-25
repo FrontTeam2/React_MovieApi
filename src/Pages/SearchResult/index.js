@@ -9,11 +9,13 @@ import {
 } from '../../Styles/common'
 import SearchSection from '../Home/Components/Search'
 import useGetSearch from '../../Hooks/Queries/get-search'
+
 import { useRecoilState } from 'recoil'
 import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
 import { useEffect } from 'react'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
+const lengthArray = new Array(8).fill(0)
 
 function SearchResultPage() {
 	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)
@@ -26,9 +28,8 @@ function SearchResultPage() {
 	const { data, status, isLoading } = useGetSearch({ title })
 
 	const navigate = useNavigate()
-
-	const goDetail = id => {
-		navigate(`/detail/${id}`)
+	const goDetail = movie => {
+		navigate(`/detail/${movie.id}`, { state: { movie: movie } })
 	}
 
 	return (
@@ -40,14 +41,8 @@ function SearchResultPage() {
 						<>
 							{data.results?.map(movie => {
 								return (
-									<li key={movie.id} onClick={() => goDetail(movie.id)}>
-										<S.ImageBox
-											image={
-												movie.poster_path
-													? `${URL}${movie.poster_path}`
-													: `${process.env.PUBLIC_URL}/favicon.svg`
-											}
-										/>
+									<li key={movie.id} onClick={() => goDetail(movie)}>
+										<S.ImageBox image={`${URL}${movie.poster_path}`} />
 										<div>
 											<div>
 												<h4>{movie.title}</h4>
@@ -60,7 +55,11 @@ function SearchResultPage() {
 							})}
 						</>
 					) : (
-						<div></div>
+						<>
+							{lengthArray.map((movie, index) => {
+								return <SearchSkelton key={index} />
+							})}
+						</>
 					)}
 				</S.SearchResultList>
 			</S.SearchResultListWrap>
@@ -106,11 +105,6 @@ const SearchResultList = styled.ul`
 		height: 100%;
 	}
 
-	/* & > li > div:first-child {
-		width: 25%;
-		background: var(--color-light-gray);
-	} */
-
 	& > li > div:last-child {
 		padding: 0 2rem;
 		width: 75%;
@@ -129,8 +123,9 @@ const SearchResultList = styled.ul`
 
 const ImageBox = styled.div`
 	width: 25%;
-	height: 100% !important;
-	background: ${({ image }) => `url(${image})`} no-repeat center center;
+	background: var(--color-light-gray);
+	background-image: ${({ image }) => `url(${image})`};
+	background-repeat: no-repeat;
 	background-size: cover;
 `
 
