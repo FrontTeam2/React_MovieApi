@@ -10,7 +10,7 @@ const getSearch = async params => {
 
 const useGetSearch = params => {
 	const { data, error, status, isLoading } = useQuery(
-		[QUERY_KEY.GET_SEARCH],
+		[QUERY_KEY.GET_SEARCH, params.title],
 		() => getSearch(params),
 		{ ...queryConfig },
 	)
