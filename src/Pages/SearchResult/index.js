@@ -9,8 +9,10 @@ import {
 } from '../../Styles/common'
 import SearchSection from '../Home/Components/Search'
 import useGetSearch from '../../Hooks/Queries/get-search'
+import SearchSkelton from './Components/Skeleton'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
+const lengthArray = new Array(8).fill(0)
 
 function SearchResultPage() {
 	const { title } = useParams()
@@ -44,7 +46,11 @@ function SearchResultPage() {
 							})}
 						</>
 					) : (
-						<div></div>
+						<>
+							{lengthArray.map((movie, index) => {
+								return <SearchSkelton key={index} />
+							})}
+						</>
 					)}
 				</S.SearchResultList>
 			</S.SearchResultListWrap>
