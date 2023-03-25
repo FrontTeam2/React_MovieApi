@@ -1,16 +1,19 @@
 import styled from 'styled-components'
 import { CiMenuBurger } from 'react-icons/ci'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { FlexAlignCSS } from '../../../../Styles/common'
 import { useNavigate } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { isOpenSideMenu } from '../../../../Atoms/sidebar.atom'
 
 function SideBar() {
-	const [isMenu, isSetMenu] = useState(false)
+	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)
 
 	const slideRef = useRef()
 	const onSideBar = () => {
 		isSetMenu(prev => !prev)
 	}
+
 	useEffect(() => {
 		if (isMenu === false) {
 			slideRef.current.style.transform = 'translateX(100%)'

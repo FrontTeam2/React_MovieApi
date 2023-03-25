@@ -1,9 +1,18 @@
+import { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
+import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
 import { GridCenter, GridColumnThree, MarginAuto } from '../../Styles/common'
 import DescSection from './Components/DescSection'
 import PosterListSection from './Components/PosterListSection'
 
 function NowPlayingPage() {
+	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)
+
+	useEffect(() => {
+		isSetMenu(false)
+	}, [])
+
 	return (
 		<S.ListContainer>
 			<S.TitleText>현재 상영작</S.TitleText>
