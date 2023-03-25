@@ -6,7 +6,7 @@ const API_KEY = process.env.REACT_APP_API_KEY
 const MovieApi = {
 	getSearch({ title }) {
 		return Axios.get(`/search/${PATH}`, {
-			params: { api_key: API_KEY, query: title },
+			params: { api_key: API_KEY, language: 'ko-KR', query: title },
 		})
 	},
 
