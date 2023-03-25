@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
@@ -13,12 +13,18 @@ function PopularPage() {
 		isSetMenu(false)
 	}, [])
 
+	const [isInfo, isSetInfo] = useState(null)
+	const onMouseOver = info => {
+		const information = info
+		isSetInfo(information)
+	}
+
 	return (
 		<S.ListContainer>
 			<S.TitleText>인기있는</S.TitleText>
 			<S.ListWrap>
-				<DescSection />
-				<PosterListSection />
+				<DescSection information={isInfo} />
+				<PosterListSection onMouseOver={onMouseOver} />
 			</S.ListWrap>
 		</S.ListContainer>
 	)
