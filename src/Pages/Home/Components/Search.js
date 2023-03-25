@@ -16,7 +16,7 @@ function SearchSection() {
 		}
 	}
 	const onSubmitSearch = () => {
-		navigate(`/search/${title}`)
+		window.location.href = `/search/${title}`
 	}
 
 	return (
