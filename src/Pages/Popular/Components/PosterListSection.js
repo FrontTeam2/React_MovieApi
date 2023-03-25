@@ -111,17 +111,15 @@ function PosterListSection() {
 					<button onClick={onClickScrolling}>더 불러오기</button>
 				</>
 			)}
-			<div ref={observerElem}>
+			<S.LoadingWrap ref={observerElem}>
 				{isSuccess && isFetchingNextPage && hasNextPage ? (
 					<>
 						{lengthArray.map((i, idx) => {
 							return <MainSkeleton key={idx} />
 						})}
 					</>
-				) : (
-					''
-				)}
-			</div>
+				) : undefined}
+			</S.LoadingWrap>
 		</S.PosterListContainer>
 	)
 }
@@ -231,9 +229,13 @@ const ImageBox = styled.div`
 		height: 100% !important;
 	}
 `
-
+const LoadingWrap = styled.div`
+	${GridCenter}
+	${GridColumnFive}
+`
 const S = {
 	PosterListContainer,
 	PosterListWrap,
 	ImageBox,
+	LoadingWrap,
 }
