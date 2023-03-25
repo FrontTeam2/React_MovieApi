@@ -16,7 +16,7 @@ import MainSkeleton from '../../Home/Components/Skeleton'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
 const lengthArray = new Array(20).fill(0)
-function PosterListSection() {
+function PosterListSection({ onMouseOver }) {
 	const [isScrolling, setIsScrolling] = useState(false)
 
 	const observerElem = useRef(null)
@@ -96,6 +96,7 @@ function PosterListSection() {
 											state: { movie: movie },
 										})
 									}
+									onMouseOver={() => onMouseOver(movie.overview)}
 								>
 									<S.ImageBox
 										image={
@@ -178,6 +179,9 @@ const PosterListWrap = styled.ul`
 		background: var(--color-light-gray);
 		box-sizing: border-box;
 		cursor: pointer;
+		:hover {
+			transform: scale(1.1);
+		}
 	}
 
 	@media screen and (max-width: 1320px) {

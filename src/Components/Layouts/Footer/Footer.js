@@ -1,10 +1,12 @@
 import styled from 'styled-components'
 import { MarginAuto } from '../../../Styles/common'
+import TopButton from './TopButton/TopButton'
 
 function Footer() {
 	return (
 		<S.FooterWrapper>
 			<S.FooterContainer>
+				<TopButton />
 				<S.Logo>HEY, C&N</S.Logo>
 				<S.Description>
 					<h2>Welcome.</h2>

@@ -1,14 +1,13 @@
 import styled from 'styled-components'
 
-function DescSection() {
+function DescSection({ information }) {
 	return (
 		<S.DescContainer>
-			<p>
-				1985년 마약 밀매업자의 비행기 추락 사고로 인해 비행기에 실려있던
-				코카인이 조지아주 채터후치 국유림에 떨어지고 코카인을 손에 넣기 위한
-				마약상들과 관광객들이 코카인을 먹은 흑곰에 의해 처참하게 죽임을 당한다는
-				내용의 실화를 바탕으로 한 영화
-			</p>
+			{information ? (
+				<p>{information}</p>
+			) : (
+				<p>* PC : 포스터에 마우스를 올릴시, 줄거리 확인 가능</p>
+			)}
 		</S.DescContainer>
 	)
 }
@@ -17,12 +16,15 @@ export default DescSection
 
 const DescContainer = styled.div`
 	width: 100%;
+	margin: 0 auto;
+	max-width: 120rem;
 	grid-column-start: 1;
 	grid-column-end: 2;
 	/* background: red; */
 
 	@media screen and (max-width: 768px) {
 		/* height: 18rem; */
+		position: relative;
 		padding: 0 2rem;
 		margin: 4rem 0;
 		grid-column-start: 1;
@@ -30,7 +32,15 @@ const DescContainer = styled.div`
 	}
 
 	& > p {
+		position: fixed;
+		max-width: 38rem;
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
+
+		@media screen and (max-width: 768px) {
+			position: relative;
+			width: 100%;
+			max-width: 100%;
+		}
 	}
 `
 const S = {
