@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import { MarginAuto } from '../../Styles/common'
+
 import Section from './Components/Section'
 import SearchSection from './Components/Search'
-import useGetPopular from '../../Hooks/Queries/Categories/get-popular'
-import useGetNowPlaying from '../../Hooks/Queries/Categories/get-nowPlaying'
-import useGetTopRated from '../../Hooks/Queries/Categories/get-topRated'
+
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
+import useGetCategory from '../../Hooks/Queries/get-category'
 
 function HomePage() {
 	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)
@@ -20,17 +20,18 @@ function HomePage() {
 		data: popularList,
 		status: popularStatus,
 		isLoading: popularIsLoading,
-	} = useGetPopular()
+	} = useGetCategory({ category: 'popular' })
 	const {
 		data: nowList,
 		status: nowStatus,
 		isLoading: nowIsLoading,
-	} = useGetNowPlaying()
+	} = useGetCategory({ category: 'now_playing' })
 	const {
 		data: topList,
 		status: topStatus,
 		isLoading: topIsLoading,
-	} = useGetTopRated()
+	} = useGetCategory({ category: 'top_rated' })
+
 	return (
 		<S.HomeContainer>
 			<SearchSection />
