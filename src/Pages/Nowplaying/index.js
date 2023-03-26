@@ -25,7 +25,6 @@ function NowPlayingPage() {
 	}
 
 	const check = isMobile()
-	console.log(check)
 	const [isInfo, isSetInfo] = useState(null)
 	const onMouseOver = info => {
 		const information = info

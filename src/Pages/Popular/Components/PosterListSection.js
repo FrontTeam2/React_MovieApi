@@ -41,7 +41,6 @@ function PosterListSection({ onMouseOver }) {
 				},
 			},
 		)
-	console.log(data)
 	useEffect(() => {
 		let fetching = false
 		if (isScrolling) {

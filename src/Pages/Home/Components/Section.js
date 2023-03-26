@@ -9,7 +9,6 @@ const lengthArray = new Array(8).fill(0)
 
 function Section({ title, data, status, isLoading }) {
 	const navigate = useNavigate()
-	console.log(data)
 
 	return (
 		<S.SectionContainer>
