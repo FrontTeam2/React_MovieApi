@@ -63,15 +63,11 @@ src
 │
 ├─Hooks
 │  └─Queries
-│      │  @config.js
-│      │  get-detail.js
-│      │  get-search.js
-│      │  get-trailer.js
-│      │
-│      └─Categories
-│              get-nowPlaying.js
-│              get-popular.js
-│              get-topRated.js
+│          @config.js
+│          get-category.js
+│          get-detail.js
+│          get-search.js
+│          get-trailer.js
 │
 ├─Pages
 │  ├─Detail
