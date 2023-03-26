@@ -2,12 +2,14 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FlexAlignCSS } from '../../../Styles/common'
 import MainSkeleton from './Skeleton'
+import { BsFillStarFill } from 'react-icons/bs'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
 const lengthArray = new Array(8).fill(0)
 
 function Section({ title, data, status, isLoading }) {
 	const navigate = useNavigate()
+	console.log(data)
 
 	return (
 		<S.SectionContainer>
@@ -26,7 +28,20 @@ function Section({ title, data, status, isLoading }) {
 										navigate(`/detail/${movie.id}`, { state: { movie: movie } })
 									}
 								>
-									<S.ImageBox image={`${URL}${movie.poster_path}`} />
+									<S.ListBox>
+										<p>
+											<BsFillStarFill
+												style={{
+													fontSize: '1.4rem',
+													color: 'yellow',
+													overflow: 'hidden',
+													marginRight: '0.3rem',
+												}}
+											/>
+											{movie.vote_average}
+										</p>
+										<S.ImageBox image={`${URL}${movie.poster_path}`} />
+									</S.ListBox>
 									<div>
 										<h4>{movie.title}</h4>
 										<p>{movie.release_date}</p>
@@ -112,6 +127,17 @@ const SliderContainer = styled.div`
 	}
 `
 
+const ListBox = styled.div`
+	position: relative;
+
+	& > p {
+		position: absolute;
+		${FlexAlignCSS}
+		bottom: 1rem;
+		right: 1rem;
+	}
+`
+
 const ImageBox = styled.div`
 	width: 14rem;
 	height: 22rem;
@@ -120,6 +146,13 @@ const ImageBox = styled.div`
 	background-image: ${({ image }) => `url(${image})`};
 	background-repeat: no-repeat;
 	background-size: cover;
+	box-shadow: inset 0 -4rem 4rem rgba(0, 0, 0, 0.5);
 `
 
-const S = { SectionContainer, TextContainer, SliderContainer, ImageBox }
+const S = {
+	SectionContainer,
+	TextContainer,
+	SliderContainer,
+	ListBox,
+	ImageBox,
+}

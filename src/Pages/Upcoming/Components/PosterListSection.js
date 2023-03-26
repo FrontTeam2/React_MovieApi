@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import MovieApi from '../../../Apis/movieApi'
 import { INFINITY_QUERY_KEY } from '../../../Consts/query-key'
 import {
+	FlexAlignCSS,
 	FlexBetWeenCSS,
 	FlexCenterCSS,
 	GridCenter,
@@ -13,6 +14,7 @@ import {
 	GridColumnThree,
 } from '../../../Styles/common'
 import MainSkeleton from '../../Home/Components/Skeleton'
+import { BsFillStarFill } from 'react-icons/bs'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
 const lengthArray = new Array(20).fill(0)
@@ -108,6 +110,19 @@ function PosterListSection({ onMouseOver }) {
 									<div>
 										<h4>{movie.title}</h4>
 										<p>{movie.release_date}</p>
+										<S.ListBox>
+											<p>
+												<BsFillStarFill
+													style={{
+														fontSize: '1.4rem',
+														color: 'yellow',
+														overflow: 'hidden',
+														marginRight: '0.3rem',
+													}}
+												/>
+												{movie.vote_average}
+											</p>
+										</S.ListBox>
 									</div>
 								</li>
 							)
@@ -167,6 +182,7 @@ const PosterListWrap = styled.ul`
 	${GridCenter}
 	${GridColumnFive}
     row-gap:3rem;
+	margin-bottom: 3rem;
 
 	& > li {
 		${FlexBetWeenCSS}
@@ -196,10 +212,6 @@ const PosterListWrap = styled.ul`
 			height: 12rem;
 		}
 
-		& > li > div:first-child {
-			width: 25%;
-		}
-
 		& > li > div:last-child {
 			width: 75% !important;
 			height: 100% !important;
@@ -207,12 +219,9 @@ const PosterListWrap = styled.ul`
 		}
 	}
 
-	& > li > div:first-child {
-		height: 70%;
-	}
-
 	& > li > div:last-child {
 		display: flex;
+		position: relative;
 		flex-direction: column;
 		width: 100%;
 		padding: 1rem;
@@ -227,6 +236,31 @@ const PosterListWrap = styled.ul`
 		white-space: nowrap;
 	}
 `
+const ListBox = styled.div`
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+
+	@media screen and (max-width: 768px) {
+		position: relative;
+		bottom: 0;
+		right: 0;
+	}
+
+	& > p {
+		position: relative;
+		${FlexAlignCSS}
+		/* bottom: 1rem; */
+		
+
+		@media screen and (max-width: 768px) {
+			position: absolute;
+			bottom: 0;
+			right: 1rem;
+		}
+	}
+`
+
 const ImageBox = styled.div`
 	width: 100%;
 	height: 22rem;
@@ -238,8 +272,11 @@ const ImageBox = styled.div`
 	@media screen and (max-width: 768px) {
 		height: 100% !important;
 	}
-`
 
+	@media screen and (max-width: 414px) {
+		width: 25%;
+	}
+`
 const LoadingWrap = styled.div`
 	${GridCenter}
 	${GridColumnFive}
@@ -247,6 +284,7 @@ const LoadingWrap = styled.div`
 const S = {
 	PosterListContainer,
 	PosterListWrap,
+	ListBox,
 	ImageBox,
 	LoadingWrap,
 }
