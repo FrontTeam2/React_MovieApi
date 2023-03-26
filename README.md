@@ -30,6 +30,107 @@
     - 포스터 없는 경우, 대체 이미지 사
 
 ### 🌳 프로젝트 폴더 구조
+```
+src
+│  App.js
+│  index.js
+│
+├─Apis
+│      index.js
+│      movieApi.js
+│
+├─Atoms
+│      sidebar.atom.js
+│
+├─Components
+│  └─Layouts
+│      │  index.js
+│      │
+│      ├─Footer
+│      │  │  Footer.js
+│      │  │
+│      │  └─TopButton
+│      │          TopButton.js
+│      │
+│      └─Header
+│          │  Header.js
+│          │
+│          └─SideBar
+│                  SideBar.js
+│
+├─Consts
+│      query-key.js
+│
+├─Hooks
+│  └─Queries
+│      │  @config.js
+│      │  get-detail.js
+│      │  get-search.js
+│      │  get-trailer.js
+│      │
+│      └─Categories
+│              get-nowPlaying.js
+│              get-popular.js
+│              get-topRated.js
+│
+├─Pages
+│  ├─Detail
+│  │  │  index.js
+│  │  │
+│  │  └─Components
+│  │          StarEval.js
+│  │          Video.js
+│  │
+│  ├─Home
+│  │  │  index.js
+│  │  │
+│  │  └─Components
+│  │          Search.js
+│  │          Section.js
+│  │          Skeleton.js
+│  │
+│  ├─Nowplaying
+│  │  │  index.js
+│  │  │
+│  │  └─Components
+│  │          DescSection.js
+│  │          PosterListSection.js
+│  │
+│  ├─Popular
+│  │  │  index.js
+│  │  │
+│  │  └─Components
+│  │          DescSection.js
+│  │          PosterListSection.js
+│  │
+│  ├─SearchResult
+│  │  │  index.js
+│  │  │
+│  │  └─Components
+│  │          Skeleton.js
+│  │
+│  ├─Toprated
+│  │  │  index.js
+│  │  │
+│  │  └─Components
+│  │          DescSection.js
+│  │          PosterListSection.js
+│  │
+│  └─Upcoming
+│      │  index.js
+│      │
+│      └─Components
+│              DescSection.js
+│              PosterListSection.js
+│
+├─Routes
+│      routing.js
+│
+└─Styles
+        common.js
+        global.js
+        theme.js
+```
 
 ### 👨‍👩‍👧‍👦 팀원 소개 및 역할
 빈태찬 | 김도은 | 윤동영 | 이하늘 | 이주홍
