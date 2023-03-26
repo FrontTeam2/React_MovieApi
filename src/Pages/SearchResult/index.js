@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import {
 	FlexAlignCSS,
+	FlexBetWeenCSS,
 	GridCenter,
 	GridColumnOne,
 	GridColumnTwo,
@@ -14,6 +15,7 @@ import { useRecoilState } from 'recoil'
 import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
 import { useEffect } from 'react'
 import SearchSkelton from './Components/Skeleton'
+import { BsFillStarFill } from 'react-icons/bs'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
 const lengthArray = new Array(8).fill(0)
@@ -52,8 +54,23 @@ function SearchResultPage() {
 										/>
 										<div>
 											<div>
-												<h4>{movie.title}</h4>
-												<p>{movie.release_date}</p>
+												<div>
+													<h4>{movie.title}</h4>
+													<p>{movie.release_date}</p>
+												</div>
+												<S.ListBox>
+													<p>
+														<BsFillStarFill
+															style={{
+																fontSize: '1.4rem',
+																color: 'yellow',
+																overflow: 'hidden',
+																marginRight: '0.3rem',
+															}}
+														/>
+														{movie.vote_average.toFixed(1)}
+													</p>
+												</S.ListBox>
 											</div>
 											<p>{movie.overview}</p>
 										</div>
@@ -120,11 +137,51 @@ const SearchResultList = styled.ul`
 		flex-direction: column;
 	}
 
+	& > li > div:last-child > div {
+		${FlexBetWeenCSS}
+
+		& > div:first-child > h4 {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		@media screen and (max-width: 768px) {
+			display: block;
+
+			& > div:first-child {
+				margin-bottom: 1rem;
+			}
+		}
+	}
+
 	& > li > div:last-child > p {
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
 		font-size: ${({ theme }) => theme.FONT_SIZE.small};
+	}
+`
+
+const ListBox = styled.div`
+	height: 100%;
+
+	@media screen and (max-width: 768px) {
+		position: relative;
+	}
+
+	& > p {
+		position: relative;
+
+		${FlexAlignCSS}
+		/* bottom: 1rem; */
+		
+
+		@media screen and (max-width: 768px) {
+			/* position: absolute; */
+			bottom: 0;
+			right: 1rem;
+		}
 	}
 `
 
@@ -140,5 +197,6 @@ const S = {
 	SearchResultContainer,
 	SearchResultListWrap,
 	SearchResultList,
+	ListBox,
 	ImageBox,
 }

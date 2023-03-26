@@ -1,6 +1,12 @@
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-import { GridCenter, GridColumnFive, MarginAuto } from '../../Styles/common'
+import {
+	FlexBetWeenCSS,
+	GridCenter,
+	GridColumnFive,
+	MarginAuto,
+} from '../../Styles/common'
+import StarEval from './Components/StarEval'
 import VideoSection from './Components/Video'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
@@ -11,7 +17,6 @@ function DetailPage() {
 		id,
 		title,
 		overview,
-		original_language,
 		poster_path,
 		backdrop_path,
 		release_date,
@@ -28,7 +33,7 @@ function DetailPage() {
 						<div>
 							<h2>{title}</h2>
 							<span>
-								{release_date} ({original_language})
+								{release_date} <StarEval vote_average={vote_average} />
 							</span>
 						</div>
 						<div>
@@ -113,6 +118,10 @@ const DescSection = styled.div`
 
 	& > div:first-child {
 		margin-bottom: 4rem;
+	}
+
+	& > div:first-child > span {
+		${FlexBetWeenCSS}
 	}
 
 	& > div:last-child > h3 {
