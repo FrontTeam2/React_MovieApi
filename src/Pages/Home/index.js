@@ -42,15 +42,15 @@ function HomePage() {
 			/>
 			<Section
 				title={'높은 평점순'}
-				data={nowList}
-				status={nowStatus}
-				isLoading={nowIsLoading}
-			/>
-			<Section
-				title={'현재 상영작'}
 				data={topList}
 				status={topStatus}
 				isLoading={topIsLoading}
+			/>
+			<Section
+				title={'현재 상영작'}
+				data={nowList}
+				status={nowStatus}
+				isLoading={nowIsLoading}
 			/>
 		</S.HomeContainer>
 	)
