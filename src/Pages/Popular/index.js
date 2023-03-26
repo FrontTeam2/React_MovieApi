@@ -13,10 +13,25 @@ function PopularPage() {
 		isSetMenu(false)
 	}, [])
 
+	const isMobile = () => {
+		const user = navigator.userAgent
+		let isCheck = false
+
+		if (user.indexOf('iPhone') > -1 || user.indexOf('Android') > -1) {
+			isCheck = true
+		}
+
+		return isCheck
+	}
+
+	const check = isMobile()
+
 	const [isInfo, isSetInfo] = useState(null)
 	const onMouseOver = info => {
 		const information = info
-		isSetInfo(information)
+		if (check === false) {
+			isSetInfo(information)
+		}
 	}
 
 	return (
