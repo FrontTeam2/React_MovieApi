@@ -10,6 +10,7 @@ function SearchSection({ searchTitle }) {
 	const onChangeSearch = e => {
 		setTitle(e.target.value)
 	}
+
 	const handleKeyPress = e => {
 		if (e.key === 'Enter') {
 			onSubmitSearch()
@@ -46,6 +47,7 @@ function SearchSection({ searchTitle }) {
 					onChange={onChangeSearch}
 					onKeyDown={handleKeyPress}
 					defaultValue={searchTitle}
+					key={searchTitle}
 				></input>
 			</S.InputContainer>
 		</S.SearchContainer>
