@@ -2,11 +2,8 @@ import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../Components/Layouts'
 import DetailPage from '../Pages/Detail'
 import HomePage from '../Pages/Home'
-import NowPlayingPage from '../Pages/Nowplaying'
-import PopularPage from '../Pages/Popular'
 import SearchResultPage from '../Pages/SearchResult'
-import TopRatedPage from '../Pages/Toprated'
-import UpComingPage from '../Pages/Upcoming'
+import InfinitePages from '../Pages/InfinitePages'
 
 const router = createBrowserRouter([
 	{
@@ -18,20 +15,20 @@ const router = createBrowserRouter([
 				element: <HomePage />,
 			},
 			{
-				path: '/popular',
-				element: <PopularPage />,
+				path: '/popular/:category/:korTitle',
+				element: <InfinitePages />,
 			},
 			{
-				path: '/now_playing',
-				element: <NowPlayingPage />,
+				path: '/now_playing/:category/:korTitle',
+				element: <InfinitePages />,
 			},
 			{
-				path: '/top_rated',
-				element: <TopRatedPage />,
+				path: '/top_rated/:category/:korTitle',
+				element: <InfinitePages />,
 			},
 			{
-				path: '/up_coming',
-				element: <UpComingPage />,
+				path: '/upcoming/:category/:korTitle',
+				element: <InfinitePages />,
 			},
 			{
 				path: '/search/:title',

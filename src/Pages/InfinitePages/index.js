@@ -5,10 +5,11 @@ import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
 import { GridCenter, GridColumnThree, MarginAuto } from '../../Styles/common'
 import DescSection from './Components/DescSection'
 import PosterListSection from './Components/PosterListSection'
+import { useParams } from 'react-router-dom'
 
-function NowPlayingPage() {
+function InfinitePages() {
 	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)
-
+	const { category, korTitle } = useParams()
 	useEffect(() => {
 		isSetMenu(false)
 	}, [])
@@ -25,6 +26,7 @@ function NowPlayingPage() {
 	}
 
 	const check = isMobile()
+
 	const [isInfo, isSetInfo] = useState(null)
 	const onMouseOver = info => {
 		const information = info
@@ -35,16 +37,16 @@ function NowPlayingPage() {
 
 	return (
 		<S.ListContainer>
-			<S.TitleText>현재 상영작</S.TitleText>
+			<S.TitleText>{korTitle}</S.TitleText>
 			<S.ListWrap>
 				<DescSection information={isInfo} />
-				<PosterListSection onMouseOver={onMouseOver} />
+				<PosterListSection onMouseOver={onMouseOver} category={category} />
 			</S.ListWrap>
 		</S.ListContainer>
 	)
 }
 
-export default NowPlayingPage
+export default InfinitePages
 
 const ListContainer = styled.section`
 	${MarginAuto}

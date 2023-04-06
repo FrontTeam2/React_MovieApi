@@ -8,7 +8,7 @@ const getCategory = async params => {
 	return res.data
 }
 
-const useGetCategory = params => {
+export const useGetCategory = params => {
 	const { data, error, status, isLoading } = useQuery(
 		[QUERY_KEY.GET_CATEGORY, params.category],
 		() => getCategory(params),
@@ -16,4 +16,3 @@ const useGetCategory = params => {
 	)
 	return { data, error, status, isLoading }
 }
-export default useGetCategory

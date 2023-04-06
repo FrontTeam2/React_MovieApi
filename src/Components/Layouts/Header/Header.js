@@ -16,10 +16,20 @@ function Header() {
 					<S.Logo onClick={() => navigate('/')}>HEY, C&N</S.Logo>
 					<S.Category>
 						<ul>
-							<li onClick={() => navigate('/popular')}>인기순</li>
-							<li onClick={() => navigate('/now_playing')}>현재 상영작</li>
-							<li onClick={() => navigate('/up_coming')}>개봉 예정작</li>
-							<li onClick={() => navigate('/top_rated')}>평점순</li>
+							<li onClick={() => navigate('/popular/popular/인기순')}>
+								인기순
+							</li>
+							<li
+								onClick={() => navigate('/now_playing/now_playing/현재 상영작')}
+							>
+								현재 상영작
+							</li>
+							<li onClick={() => navigate('/upcoming/upcoming/개봉 예정작')}>
+								개봉 예정작
+							</li>
+							<li onClick={() => navigate('/top_rated/top_rated/평점순')}>
+								평점순
+							</li>
 						</ul>
 					</S.Category>
 				</S.HeaderGNB>

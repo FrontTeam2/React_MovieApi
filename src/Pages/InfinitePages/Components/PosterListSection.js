@@ -3,16 +3,16 @@ import MovieApi from '../../../Apis/movieApi'
 import { INFINITY_QUERY_KEY } from '../../../Consts/query-key'
 import InfiniteList from '../../InfiniteList/infiniteList'
 
-function PosterListSection({ onMouseOver }) {
+function PosterListSection({ onMouseOver, category }) {
 	const fetchMovies = async page => {
-		const res = await MovieApi.getCategory({ category: 'upcoming', page })
+		const res = await MovieApi.getCategory({ category, page })
+
 		return res.data.results
 	}
-
 	const { data, isSuccess, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useInfiniteQuery(
-			[INFINITY_QUERY_KEY.GET_IF_UPCOMING],
-			({ pageParam = 1 }) => fetchMovies(pageParam),
+			[INFINITY_QUERY_KEY.GET_IF_NOW_PLAYING, category],
+			fetchMovies,
 			{
 				getNextPageParam: (lastPage, allPages) => {
 					const nextPage = allPages.length + 1
