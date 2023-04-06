@@ -7,7 +7,7 @@ import SearchSection from './Components/Search'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
-import useGetCategory from '../../Hooks/Queries/get-category'
+import { useGetCategory } from '../../Hooks/Queries/get-category'
 
 function HomePage() {
 	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)

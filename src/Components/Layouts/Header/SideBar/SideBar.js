@@ -38,10 +38,10 @@ function SideBar() {
 
 			<S.SideBarContainer ref={slideRef}>
 				<ul>
-					<li onClick={() => navigate('/popular')}>인기순</li>
-					<li onClick={() => navigate('/now_playing')}>현재 상영작</li>
-					<li onClick={() => navigate('/up_coming')}>개봉 예정작</li>
-					<li onClick={() => navigate('/top_rated')}>평점순</li>
+					<li onClick={() => navigate('/list/popular')}>인기순</li>
+					<li onClick={() => navigate('/list/now_playing')}>현재 상영작</li>
+					<li onClick={() => navigate('/list/upcoming')}>개봉 예정작</li>
+					<li onClick={() => navigate('/list/top_rated')}>평점순</li>
 				</ul>
 			</S.SideBarContainer>
 		</S.HamburgerMenu>

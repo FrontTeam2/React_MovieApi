@@ -14,8 +14,8 @@ import useGetSearch from '../../Hooks/Queries/get-search'
 import { useRecoilState } from 'recoil'
 import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
 import { useEffect } from 'react'
-import SearchSkelton from './Components/Skeleton'
 import { BsFillStarFill } from 'react-icons/bs'
+import LoadingSkeleton from '../../Components/Skeleton/Skeleton'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
 const lengthArray = new Array(8).fill(0)
@@ -80,9 +80,9 @@ function SearchResultPage() {
 						</>
 					) : (
 						<>
-							{lengthArray.map((movie, index) => {
-								return <SearchSkelton key={index} />
-							})}
+							{lengthArray.map((i, idx) => (
+								<LoadingSkeleton key={idx} width={'100%'} height={'20rem'} />
+							))}
 						</>
 					)}
 				</S.SearchResultList>
