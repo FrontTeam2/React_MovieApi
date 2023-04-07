@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {
 	FlexBetWeenCSS,
 	GridCenter,
-	GridColumnFive,
+	GridColumn,
 	MarginAuto,
 } from '../../Styles/common'
 import StarEval from './Components/StarEval'
@@ -82,7 +82,7 @@ const Wrapper = styled.div`
 	padding: 4rem 0;
 	${MarginAuto}
 	${GridCenter}
-    ${GridColumnFive}
+    ${GridColumn(5)}
     row-gap: 3rem;
 `
 

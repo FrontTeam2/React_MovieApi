@@ -6,9 +6,7 @@ import {
 	FlexBetWeenCSS,
 	FlexCenterCSS,
 	GridCenter,
-	GridColumnFive,
-	GridColumnOne,
-	GridColumnThree,
+	GridColumn,
 } from '../../../Styles/common'
 import MainSkeleton from '../../Home/Components/Skeleton'
 import { BsFillStarFill } from 'react-icons/bs'
@@ -164,7 +162,7 @@ const PosterListContainer = styled.div`
 const PosterListWrap = styled.ul`
 	margin-bottom: 3rem;
 	${GridCenter}
-	${GridColumnFive}
+	${GridColumn(5)}
     row-gap:3rem;
 	margin-bottom: 3rem;
 
@@ -185,11 +183,11 @@ const PosterListWrap = styled.ul`
 	}
 
 	@media screen and (max-width: 1320px) {
-		${GridColumnThree}
+		${GridColumn(3)}
 	}
 
 	@media screen and (max-width: 414px) {
-		${GridColumnOne};
+		${GridColumn(1)};
 
 		& > li {
 			flex-direction: row;
@@ -263,7 +261,7 @@ const ImageBox = styled.div`
 `
 const LoadingWrap = styled.div`
 	${GridCenter}
-	${GridColumnFive}
+	${GridColumn(5)}
 `
 const S = {
 	PosterListContainer,

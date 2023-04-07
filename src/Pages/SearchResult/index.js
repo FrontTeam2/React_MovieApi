@@ -4,8 +4,7 @@ import {
 	FlexAlignCSS,
 	FlexBetWeenCSS,
 	GridCenter,
-	GridColumnOne,
-	GridColumnTwo,
+	GridColumn,
 	MarginAuto,
 } from '../../Styles/common'
 import SearchSection from '../Home/Components/Search'
@@ -104,11 +103,11 @@ const SearchResultListWrap = styled.div`
 
 const SearchResultList = styled.ul`
 	${GridCenter}
-	${GridColumnTwo}
+	${GridColumn(2)}
     row-gap: 3rem;
 
 	@media screen and (max-width: 768px) {
-		${GridColumnOne}
+		${GridColumn(1)}
 	}
 
 	& > li {

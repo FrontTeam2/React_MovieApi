@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
-import { GridCenter, GridColumnThree, MarginAuto } from '../../Styles/common'
+import { GridCenter, GridColumn, MarginAuto } from '../../Styles/common'
 import DescSection from './Components/DescSection'
 import PosterListSection from './Components/PosterListSection'
 import { useParams } from 'react-router-dom'
@@ -61,7 +61,7 @@ const ListContainer = styled.section`
 
 const ListWrap = styled.div`
 	${GridCenter}
-	${GridColumnThree}
+	${GridColumn(3)}
 `
 
 const TitleText = styled.h2`
