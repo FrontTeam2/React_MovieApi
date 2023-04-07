@@ -1,9 +1,6 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import MovieApi from '../../../Apis/movieApi'
-import { INFINITY_QUERY_KEY } from '../../../Consts/query-key'
 import {
 	FlexAlignCSS,
 	FlexBetWeenCSS,
@@ -15,33 +12,20 @@ import {
 } from '../../../Styles/common'
 import MainSkeleton from '../../Home/Components/Skeleton'
 import { BsFillStarFill } from 'react-icons/bs'
+import { useGetInfinite } from '../../../Hooks/Queries/get-category'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
 const lengthArray = new Array(20).fill(0)
-function PosterListSection({ onMouseOver }) {
+function PosterListSection({ onMouseOver, category }) {
 	const [isScrolling, setIsScrolling] = useState(false)
 
 	const observerElem = useRef(null)
 	const onClickScrolling = () => {
 		setIsScrolling(true)
 	}
-	const fetchMovies = async page => {
-		const res = await MovieApi.getCategory({ category: 'upcoming', page })
-		return res.data.results
-	}
 
 	const { data, isSuccess, hasNextPage, fetchNextPage, isFetchingNextPage } =
-		useInfiniteQuery(
-			[INFINITY_QUERY_KEY.GET_IF_UPCOMING],
-			({ pageParam = 1 }) => fetchMovies(pageParam),
-			{
-				getNextPageParam: (lastPage, allPages) => {
-					const nextPage = allPages.length + 1
-
-					return lastPage.length !== 0 ? nextPage : undefined
-				},
-			},
-		)
+		useGetInfinite({ category })
 
 	useEffect(() => {
 		let fetching = false
@@ -88,8 +72,8 @@ function PosterListSection({ onMouseOver }) {
 		<S.PosterListContainer>
 			<S.PosterListWrap>
 				{isSuccess === true &&
-					data.pages.map(page =>
-						page.map(movie => {
+					data?.pages.map(page =>
+						page.results.map(movie => {
 							return (
 								<li
 									key={movie.id}

@@ -5,8 +5,16 @@ import { isOpenSideMenu } from '../../Atoms/sidebar.atom'
 import { GridCenter, GridColumnThree, MarginAuto } from '../../Styles/common'
 import DescSection from './Components/DescSection'
 import PosterListSection from './Components/PosterListSection'
+import { useParams } from 'react-router-dom'
 
-function NowPlayingPage() {
+function ListPage() {
+	const TITLE = {
+		now_playing: '현재 상영작',
+		popular: '인기 있는',
+		top_rated: '평점순',
+		upcoming: '개봉 예정작',
+	}
+	const { category } = useParams()
 	const [isMenu, isSetMenu] = useRecoilState(isOpenSideMenu)
 
 	useEffect(() => {
@@ -35,16 +43,16 @@ function NowPlayingPage() {
 
 	return (
 		<S.ListContainer>
-			<S.TitleText>현재 상영작</S.TitleText>
+			<S.TitleText>{TITLE[category]}</S.TitleText>
 			<S.ListWrap>
 				<DescSection information={isInfo} />
-				<PosterListSection onMouseOver={onMouseOver} />
+				<PosterListSection onMouseOver={onMouseOver} category={category} />
 			</S.ListWrap>
 		</S.ListContainer>
 	)
 }
 
-export default NowPlayingPage
+export default ListPage
 
 const ListContainer = styled.section`
 	${MarginAuto}
