@@ -43,22 +43,30 @@ src
 │      sidebar.atom.js
 │
 ├─Components
-│  └─Layouts
-│      │  index.js
-│      │
-│      ├─Footer
-│      │  │  Footer.js
-│      │  │
-│      │  └─TopButton
-│      │          TopButton.js
-│      │
-│      └─Header
-│          │  Header.js
-│          │
-│          └─SideBar
-│                  SideBar.js
+│  ├─IconBox
+│  │      IconBox.js
+│  │      IconBox.style.js
+│  │
+│  ├─Layouts
+│  │  │  index.js
+│  │  │
+│  │  ├─Footer
+│  │  │  │  Footer.js
+│  │  │  │
+│  │  │  └─TopButton
+│  │  │          TopButton.js
+│  │  │
+│  │  └─Header
+│  │      │  Header.js
+│  │      │
+│  │      └─SideBar
+│  │              SideBar.js
+│  │
+│  └─Skeleton
+│          Skeleton.js
 │
 ├─Consts
+│      category-title.js
 │      query-key.js
 │
 ├─Hooks
@@ -83,49 +91,27 @@ src
 │  │  └─Components
 │  │          Search.js
 │  │          Section.js
-│  │          Skeleton.js
 │  │
-│  ├─Nowplaying
+│  ├─List
 │  │  │  index.js
 │  │  │
 │  │  └─Components
-│  │          DescSection.js
-│  │          PosterListSection.js
+│  │          Information.js
+│  │          Section.js
 │  │
-│  ├─Popular
-│  │  │  index.js
-│  │  │
-│  │  └─Components
-│  │          DescSection.js
-│  │          PosterListSection.js
-│  │
-│  ├─SearchResult
-│  │  │  index.js
-│  │  │
-│  │  └─Components
-│  │          Skeleton.js
-│  │
-│  ├─Toprated
-│  │  │  index.js
-│  │  │
-│  │  └─Components
-│  │          DescSection.js
-│  │          PosterListSection.js
-│  │
-│  └─Upcoming
-│      │  index.js
-│      │
-│      └─Components
-│              DescSection.js
-│              PosterListSection.js
+│  └─SearchResult
+│          index.js
 │
 ├─Routes
 │      routing.js
 │
-└─Styles
-        common.js
-        global.js
-        theme.js
+├─Styles
+│      common.js
+│      global.js
+│      theme.js
+│
+└─Utils
+        isMobile.js
 ```
 
 ### 👨‍👩‍👧‍👦 팀원 소개 및 역할
@@ -149,5 +135,4 @@ PM, <br/>전체 UXUI, <br />상세 페이지 조회 기능 | API 모듈화, <br>
 **react-query** | 데이터 관리 라이브러리
 
 ### 🤝 협업 
-Notion | https://legend-asiago-8af.notion.site/e7b571d087054fb6a3d0ef9208674887 |
-|--|--|
+* [Notion](https://legend-asiago-8af.notion.site/e7b571d087054fb6a3d0ef9208674887)
