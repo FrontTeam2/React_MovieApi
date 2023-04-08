@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FlexAlignCSS } from '../../../Styles/common'
-import MainSkeleton from './Skeleton'
 import { BsFillStarFill } from 'react-icons/bs'
+import LoadingSkeleton from '../../../Components/Skeleton/Skeleton'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
 const lengthArray = new Array(8).fill(0)
@@ -50,9 +50,11 @@ function Section({ title, data, status, isLoading }) {
 						</>
 					) : (
 						<>
-							{lengthArray.map((i, idx) => {
-								return <MainSkeleton key={idx} />
-							})}
+							{lengthArray.map((i, idx) => (
+								<S.SkeletonWrap key={idx}>
+									<LoadingSkeleton width={'14rem'} height={'22rem'} />
+								</S.SkeletonWrap>
+							))}
 						</>
 					)}
 				</ul>
@@ -107,13 +109,6 @@ const SliderContainer = styled.div`
 		}
 	}
 
-	/* & > ul > li > div:first-child {
-		width: 14rem;
-		height: 22rem;
-		background: #eee;
-		border-radius: 2rem;
-	} */
-
 	& > ul > li > div:last-child {
 		padding: 2rem 2rem 1rem;
 		width: 14rem;
@@ -148,10 +143,18 @@ const ImageBox = styled.div`
 	box-shadow: inset 0 -4rem 4rem rgba(0, 0, 0, 0.5);
 `
 
+const SkeletonWrap = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-right: 5px;
+`
+
 const S = {
 	SectionContainer,
 	TextContainer,
 	SliderContainer,
 	ListBox,
 	ImageBox,
+	SkeletonWrap,
 }

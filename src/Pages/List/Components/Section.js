@@ -1,51 +1,32 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useGetCategoryInfinite } from '../../../Hooks/Queries/get-category'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
-import MovieApi from '../../../Apis/movieApi'
-import { INFINITY_QUERY_KEY } from '../../../Consts/query-key'
 import {
-	FlexAlignCSS,
-	FlexBetWeenCSS,
 	FlexCenterCSS,
+	FlexBetWeenCSS,
 	GridCenter,
 	GridColumnFive,
 	GridColumnOne,
 	GridColumnThree,
 } from '../../../Styles/common'
-import MainSkeleton from '../../Home/Components/Skeleton'
+import LoadingSkeleton from '../../../Components/Skeleton/Skeleton'
+import styled from 'styled-components'
 import { BsFillStarFill } from 'react-icons/bs'
+import IconBox from '../../../Components/IconBox/IconBox'
 
 const URL = process.env.REACT_APP_IMAGE_BASEURL
-const lengthArray = new Array(20).fill(0)
-function PosterListSection({ onMouseOver }) {
-	const [isScrolling, setIsScrolling] = useState(false)
+const lengthArray = new Array(5).fill(0)
 
-	const observerElem = useRef(null)
-	const onClickScrolling = () => {
-		setIsScrolling(true)
-	}
-	const fetchMovies = async page => {
-		const res = await MovieApi.getCategory({ category: 'upcoming', page })
-		return res.data.results
-	}
+function PosterListSection({ category, onMouseOver }) {
+	const navigate = useNavigate()
 
+	const [isScroll, setIsScroll] = useState(false)
 	const { data, isSuccess, hasNextPage, fetchNextPage, isFetchingNextPage } =
-		useInfiniteQuery(
-			[INFINITY_QUERY_KEY.GET_IF_UPCOMING],
-			({ pageParam = 1 }) => fetchMovies(pageParam),
-			{
-				getNextPageParam: (lastPage, allPages) => {
-					const nextPage = allPages.length + 1
-
-					return lastPage.length !== 0 ? nextPage : undefined
-				},
-			},
-		)
+		useGetCategoryInfinite({ category })
 
 	useEffect(() => {
 		let fetching = false
-		if (isScrolling) {
+		if (isScroll) {
 			const handleScroll = async e => {
 				const { scrollHeight, scrollTop, clientHeight } =
 					e.target.scrollingElement
@@ -60,100 +41,76 @@ function PosterListSection({ onMouseOver }) {
 				document.removeEventListener('scroll', handleScroll)
 			}
 		}
-	}, [isScrolling, fetchNextPage, hasNextPage])
-
-	const handleObserver = useCallback(
-		entries => {
-			const [target] = entries
-			if (target.isIntersecting) {
-				fetchNextPage()
-			}
-		},
-		[fetchNextPage, hasNextPage],
-	)
-
-	useEffect(() => {
-		const element = observerElem.current
-		const option = { threshold: 0 }
-		if (isScrolling) {
-			const observer = new IntersectionObserver(handleObserver, option)
-			observer.observe(element)
-			return () => observer.unobserve(element)
-		}
-	}, [fetchNextPage, hasNextPage, handleObserver])
-
-	const navigate = useNavigate()
+	}, [isScroll, fetchNextPage, hasNextPage])
 
 	return (
 		<S.PosterListContainer>
 			<S.PosterListWrap>
-				{isSuccess === true &&
-					data.pages.map(page =>
-						page.map(movie => {
-							return (
-								<li
-									key={movie.id}
-									onClick={() =>
-										navigate(`/detail/${movie.id}`, {
-											state: { movie: movie },
-										})
+				{isSuccess &&
+					data?.pages.map(page =>
+						page.results.map(movie => (
+							<li
+								key={movie.id}
+								onClick={() =>
+									navigate(`/detail/${movie.id}`, {
+										state: { movie: movie },
+									})
+								}
+								onMouseOver={() => onMouseOver(movie.overview)}
+							>
+								<S.ImageBox
+									image={
+										movie.poster_path
+											? `${URL}${movie.poster_path}`
+											: `${process.env.PUBLIC_URL}/favicon.svg`
 									}
-									onMouseOver={() => onMouseOver(movie.overview)}
-								>
-									<S.ImageBox
-										image={
-											movie.poster_path
-												? `${URL}${movie.poster_path}`
-												: `${process.env.PUBLIC_URL}/favicon.svg`
-										}
-									/>
-									<div>
-										<h4>{movie.title}</h4>
-										<p>{movie.release_date}</p>
-										<S.ListBox>
-											<p>
-												<BsFillStarFill
-													style={{
-														fontSize: '1.4rem',
-														color: 'yellow',
-														overflow: 'hidden',
-														marginRight: '0.3rem',
-													}}
-												/>
-												{movie.vote_average}
-											</p>
-										</S.ListBox>
-									</div>
-								</li>
-							)
-						}),
+								/>
+								<div>
+									<h4>{movie.title}</h4>
+									<p>{movie.release_date}</p>
+									<S.ListBox>
+										<IconBox>
+											<BsFillStarFill
+												style={{
+													fontSize: '1.4rem',
+													color: 'yellow',
+													overflow: 'hidden',
+													marginRight: '0.3rem',
+												}}
+											/>
+											{movie.vote_average}
+										</IconBox>
+									</S.ListBox>
+								</div>
+							</li>
+						)),
 					)}
 			</S.PosterListWrap>
-			{!isScrolling && (
+			{!isScroll && (
 				<>
-					<button onClick={onClickScrolling}>더 불러오기</button>
+					<button onClick={() => setIsScroll(true)}>더 불러오기</button>
 				</>
 			)}
-			<S.LoadingWrap ref={observerElem}>
-				{isSuccess && isFetchingNextPage && hasNextPage ? (
+			<S.LoadingWrap>
+				{isFetchingNextPage && hasNextPage ? (
 					<>
-						{lengthArray.map((i, idx) => {
-							return <MainSkeleton key={idx} />
-						})}
+						{lengthArray.map((i, idx) => (
+							<LoadingSkeleton key={idx} width={'100%'} height={'20rem'} />
+						))}
 					</>
-				) : undefined}
+				) : (
+					<></>
+				)}
 			</S.LoadingWrap>
 		</S.PosterListContainer>
 	)
 }
-
 export default PosterListSection
 
 const PosterListContainer = styled.div`
 	width: 100%;
 	grid-column-start: 2;
 	grid-column-end: 4;
-	/* background: blue; */
 
 	@media screen and (max-width: 768px) {
 		padding: 0 2rem;
@@ -246,26 +203,12 @@ const ListBox = styled.div`
 		bottom: 0;
 		right: 0;
 	}
-
-	& > p {
-		position: relative;
-		${FlexAlignCSS}
-		/* bottom: 1rem; */
-		
-
-		@media screen and (max-width: 768px) {
-			position: absolute;
-			bottom: 0;
-			right: 1rem;
-		}
-	}
 `
 
 const ImageBox = styled.div`
 	width: 100%;
 	height: 22rem;
 	background: #eee;
-	/* border-radius: 2rem; */
 	background: ${({ image }) => `url(${image})`} no-repeat center center;
 	background-size: cover;
 
